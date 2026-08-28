@@ -125,7 +125,8 @@
     reps: '횟수 (많을수록 상위)',
     weight: '중량 (무거울수록 상위)',
     points: '점수 (높을수록 상위)',
-    distance: '거리 (멀수록 상위)'
+    distance: '거리 (멀수록 상위)',
+    calories: '칼로리 (높을수록 상위)'
   };
 
   function normKind(v) {
@@ -133,7 +134,8 @@
     if (/time|시간|기록|for time|속도/.test(k)) return 'time';
     if (/rep|횟수|개수|amrap|round/.test(k)) return 'reps';
     if (/weight|중량|무게|kg|lb|1rm|max/.test(k)) return 'weight';
-    if (/dist|거리|m$|미터|칼로리|cal/.test(k)) return 'distance';
+    if (/cal/.test(k) || /칼로리/.test(k)) return 'calories';
+    if (/dist|거리|m$|미터/.test(k)) return 'distance';
     if (/point|점수|score/.test(k)) return 'points';
     return 'time';
   }
@@ -285,7 +287,6 @@
     el.count.textContent = list.length + ' / ' + state.teams.length + '팀';
 
     var head = '<div class="wodhead"><h2>' + esc(w.name) + '</h2>' +
-      (w.note ? '<p>' + esc(w.note) + '</p>' : '') +
       '<span class="kind">' + (KIND_LABEL[w.kind] || w.kind) + '</span></div>';
 
     if (!w.scored) {
@@ -429,10 +430,11 @@
       '북극성', '용광로', '파도', '사자후', '번개', '설산', '유령', '거인',
       '독수리', '화산', '심연', '코브라', '폭풍', '기린', '메테오', '방패'];
     var wods = [
-      { id: 'event1', name: 'Event 1', short: 'E1', kind: 'time', note: '21-15-9 Thruster / Pull-up (팀 분할)\nTime cap 12:00' },
-      { id: 'event2', name: 'Event 2', short: 'E2', kind: 'weight', note: '팀 3인 합산 1RM Clean (kg)' },
-      { id: 'event3', name: 'Event 3', short: 'E3', kind: 'reps', note: '15분 AMRAP, 팀 총 렙수' },
-      { id: 'final', name: 'Final', short: 'F', kind: 'time', note: '상위 8팀 결승 (추후 진행)' }
+      { id: 'e1-1', name: 'Event 1-1', short: 'E1-1', kind: 'time', note: 'Event 1-1 와드 내용 및 타임캡을 여기에 입력' },
+      { id: 'e1-2', name: 'Event 1-2', short: 'E1-2', kind: 'time', note: 'Event 1-2 와드 내용 및 타임캡을 여기에 입력' },
+      { id: 'e2-1', name: 'Event 2-1', short: 'E2-1', kind: 'weight', note: 'Event 2-1 와드 내용을 여기에 입력' },
+      { id: 'e2-2', name: 'Event 2-2', short: 'E2-2', kind: 'weight', note: 'Event 2-2 와드 내용을 여기에 입력' },
+      { id: 'e3', name: 'Event 3', short: 'E3', kind: 'reps', note: 'Event 3 와드 내용을 여기에 입력' }
     ];
     var seed = 7;
     function rnd() { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
@@ -440,11 +442,13 @@
     state.wods = wods;
     state.teams = names.map(function (n, i) {
       var raw = {};
-      raw.event1 = rnd() < .12 ? 'CAP+' + Math.floor(rnd() * 30 + 1)
+      raw['e1-1'] = rnd() < .12 ? 'CAP+' + Math.floor(rnd() * 30 + 1)
         : fmtTime(Math.round(300 + rnd() * 400));
-      raw.event2 = String(Math.round(260 + rnd() * 140));
-      raw.event3 = String(Math.round(210 + rnd() * 130));
-      raw.final = '';
+      raw['e1-2'] = rnd() < .12 ? 'CAP+' + Math.floor(rnd() * 30 + 1)
+        : fmtTime(Math.round(300 + rnd() * 400));
+      raw['e2-1'] = String(Math.round(260 + rnd() * 140));
+      raw['e2-2'] = String(Math.round(260 + rnd() * 140));
+      raw['e3'] = String(Math.round(210 + rnd() * 130));
       return { name: n + ' 크루', members: '선수 3명', raw: raw };
     });
 
