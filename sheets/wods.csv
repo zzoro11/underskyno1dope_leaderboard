@@ -1,0 +1,5 @@
+id,name,short,type,note,hidden
+event1,Event 1,E1,time,Event 1 와드 내용 및 타임캡을 여기에 입력,
+event2,Event 2,E2,time,Event 2 와드 내용 및 타임캡을 여기에 입력,
+event3,Event 3,E3,reps,Event 3 와드 내용을 여기에 입력,
+final,Final,F,time,결승 진출팀 대상 (추후 진행),

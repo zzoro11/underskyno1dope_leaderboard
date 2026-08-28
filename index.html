@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>천하제일돕:Harvest</title>
+<meta name="description" content="크로스핏 대회 안내 및 실시간 리더보드">
+<meta name="theme-color" content="#0b0d10">
+<meta property="og:title" content="천하제일돕:Harvest">
+<meta property="og:description" content="크로스핏 대회 안내 및 실시간 리더보드">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+<link rel="stylesheet" href="assets/style.css?v=8">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="title-logo" src="assets/images/title-logo.png" alt="천하제일돕:Harvest">
+  </div>
+</header>
+
+<div class="topbar" id="topbar">
+  <div class="wrap"><div id="main-nav" class="mainnav" role="tablist" aria-label="메뉴"></div></div>
+  <div class="wrap">
+    <div id="sub-nav-content" class="tabs" role="tablist" aria-label="세부 메뉴" hidden></div>
+    <div id="tabs" class="tabs" role="tablist" aria-label="종목 선택" hidden></div>
+  </div>
+</div>
+
+<main class="wrap" id="main">
+
+  <section id="page-content" class="page" hidden>
+    <div id="content-body"></div>
+  </section>
+
+  <section id="page-leaderboard" class="page" hidden>
+    <div class="status">
+      <span id="live-dot" class="dot"></span>
+      <span id="status-text">불러오는 중…</span>
+      <button id="refresh" class="refresh" type="button" aria-label="새로고침">↻</button>
+    </div>
+
+    <div id="banner" class="banner" hidden></div>
+
+    <div class="toolbar">
+      <input id="search" class="search" type="search" placeholder="팀 이름 검색" autocomplete="off">
+      <span id="count" class="count"></span>
+    </div>
+
+    <div id="board"></div>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p id="foot-note"></p>
+</footer>
+
+<script src="config.js?v=8"></script>
+<script src="assets/content.js?v=8"></script>
+<script src="assets/app.js?v=8"></script>
+<script src="assets/nav.js?v=8"></script>
+</body>
+</html>
