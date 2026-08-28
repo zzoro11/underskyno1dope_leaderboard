@@ -163,6 +163,7 @@ body::before{
 .score .val{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .score .lbl{display:block;font-size:11px;color:var(--txt-3);margin-top:1px}
 .score .val.dim{color:var(--txt-3);font-weight:600;font-size:15px}
+.score .tie-note{font-size:12px;font-weight:600;color:var(--txt-3);letter-spacing:0}
 
 .empty{text-align:center;color:var(--txt-3);padding:48px 0;font-size:15px}
 

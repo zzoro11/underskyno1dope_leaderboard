@@ -118,6 +118,15 @@
     return { state: 'ok', value: n, display: s };
   }
 
+  // 동점자 판정용 기록 (예: "13:23") — 항상 시간으로 해석, 빠를수록 상위
+  function parseTieTime(raw) {
+    var s = String(raw == null ? '' : raw).trim();
+    if (!s) return null;
+    var t = parseTime(s);
+    if (t == null) return null;
+    return { value: t, display: fmtTime(t) };
+  }
+
   function higherIsBetter(kind) { return kind !== 'time'; }
 
   var KIND_LABEL = {
@@ -149,11 +158,13 @@
       if (sc.state === 'ok') { bucket = 0; val = hib ? -sc.value : sc.value; }
       else if (sc.state === 'cap') { bucket = 1; val = sc.value; }
       else { bucket = 2; val = 0; }
-      return { team: e.team, score: sc, bucket: bucket, val: val, rank: 0 };
+      var tieVal = e.tie ? e.tie.value : null;
+      return { team: e.team, score: sc, tie: e.tie, bucket: bucket, val: val, tieVal: tieVal, rank: 0 };
     });
 
     keyed.sort(function (a, b) {
       return (a.bucket - b.bucket) || (a.val - b.val) ||
+             ((a.tieVal == null ? Infinity : a.tieVal) - (b.tieVal == null ? Infinity : b.tieVal)) ||
              a.team.name.localeCompare(b.team.name, 'ko');
     });
 
@@ -162,7 +173,8 @@
       var j = i;
       while (j + 1 < keyed.length &&
              keyed[j + 1].bucket === keyed[i].bucket &&
-             keyed[j + 1].val === keyed[i].val) j++;
+             keyed[j + 1].val === keyed[i].val &&
+             keyed[j + 1].tieVal === keyed[i].tieVal) j++;
       var r = TIE_AVG ? ((i + 1) + (j + 1)) / 2 : (i + 1);
       for (var k = i; k <= j; k++) keyed[k].rank = r;
       i = j + 1;
@@ -177,7 +189,11 @@
 
     wods.forEach(function (w) {
       var entries = teams.map(function (t) {
-        return { team: t, score: parseScore(t.raw[w.id], w.kind) };
+        return {
+          team: t,
+          score: parseScore(t.raw[w.id], w.kind),
+          tie: parseTieTime(t.raw[w.id + '-tie'])
+        };
       });
       var ranked = rankOne(entries, w.kind);
       w.ranked = ranked;
@@ -297,13 +313,15 @@
     return head + list.map(function (r) {
       var pending = r.bucket === 2;
       var pos = pending ? '—' : fmtRank(r.rank);
+      var tieHtml = (r.tie && r.tie.display)
+        ? ' <span class="tie-note">(' + esc(r.tie.display) + ')</span>' : '';
       return '<div class="row' + (pending ? '' : medalClass(Math.round(r.rank))) + '">' +
         '<div class="pos">' + pos + '</div>' +
         '<div class="info"><div class="team">' + esc(r.team.name) + '</div>' +
           (r.team.members ? '<div class="members">' + esc(r.team.members) + '</div>' : '') +
         '</div>' +
         '<div class="score"><span class="val' + (pending ? ' dim' : '') + '">' +
-          esc(r.score.display) + '</span><span class="lbl">기록</span></div>' +
+          esc(r.score.display) + tieHtml + '</span><span class="lbl">기록</span></div>' +
       '</div>';
     }).join('');
   }
@@ -368,6 +386,8 @@
       var raw = {};
       wods.forEach(function (w) {
         raw[w.id] = o[w.id.toLowerCase()] != null ? o[w.id.toLowerCase()] : '';
+        var tieCol = (w.id + '-tie').toLowerCase();
+        raw[w.id + '-tie'] = o[tieCol] != null ? o[tieCol] : '';
       });
       return {
         name: name,

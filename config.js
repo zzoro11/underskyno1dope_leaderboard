@@ -21,7 +21,7 @@ window.LEADERBOARD_CONFIG = {
   /* 동점 처리 방식
      "average" : 공동 2위가 2명이면 둘 다 2.5점 (합계가 공평함, 권장)
      "min"     : 공동 2위가 2명이면 둘 다 2점, 다음은 4위             */
-  tieMode: "average",
+  tieMode: "min",
 
   /* 총점이 같을 때 순위를 가르는 기준
      "best" : 더 좋은 등수를 많이 가진 팀이 상위 (크로스핏 표준)
