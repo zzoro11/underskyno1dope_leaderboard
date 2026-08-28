@@ -41,10 +41,6 @@ body::before{
 /* ---------- hero ---------- */
 .hero{
   padding:28px 0 20px;
-  background:
-    radial-gradient(120% 100% at 50% 0%, rgba(255,90,31,.18) 0%, rgba(255,90,31,0) 60%),
-    var(--bg-2);
-  border-bottom:1px solid var(--line);
 }
 .title-logo{
   display:block;
@@ -69,10 +65,7 @@ body::before{
 
 /* ---------- topbar (메인 메뉴 + 서브탭) ---------- */
 .topbar{
-  position:sticky;top:0;z-index:20;
-  background:rgba(11,13,16,.92);
-  backdrop-filter:saturate(150%) blur(10px);
-  border-bottom:1px solid var(--line);
+  position:relative;z-index:20;
 }
 .topbar .wrap{padding:0}
 
