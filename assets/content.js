@@ -42,8 +42,7 @@ window.SITE_CONTENT = {
           label: "Best Dresser",
           title: "Best Dresser",
           body: `
-            <div class="img-placeholder"><span class="ico">👕</span>안내 이미지 준비 중</div>
-            <p>베스트 드레서 선정 방식과 투표 방법이 이곳에 안내될 예정입니다.</p>
+            <img src="assets/images/notice-bestdresser.jpg" alt="베스트 드레서 상 안내">
           `
         }
       ]

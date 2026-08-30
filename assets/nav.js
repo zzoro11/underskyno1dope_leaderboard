@@ -120,4 +120,17 @@
   }
 
   if (SECTIONS.length) goSection(SECTIONS[0].id);
+
+  /* ---------- 인트로 (매 접속마다) ---------- */
+  document.addEventListener('click', function dismissIntro() {
+    if (!document.documentElement.classList.contains('intro')) return;
+    document.documentElement.classList.add('intro-leaving');
+    setTimeout(function () {
+      document.documentElement.classList.remove('intro', 'intro-leaving');
+      document.documentElement.classList.add('intro-reveal');
+      setTimeout(function () {
+        document.documentElement.classList.remove('intro-reveal');
+      }, 700);
+    }, 350);
+  });
 })();
