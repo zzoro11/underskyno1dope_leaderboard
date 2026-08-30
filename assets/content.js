@@ -8,7 +8,7 @@ window.SITE_CONTENT = {
   sections: [
     {
       id: "info",
-      label: "Competition Info",
+      label: "Notice",
       subtabs: [
         {
           id: "timetable",
@@ -57,8 +57,8 @@ window.SITE_CONTENT = {
           label: "Event1",
           title: "Event 1",
           body: `
-            <div class="img-placeholder"><span class="ico">📖</span>와드 상세 이미지/문서 준비 중</div>
-            <p>Event 1 와드 내용과 진행 규정이 이곳에 안내될 예정입니다.</p>
+            <img src="assets/images/event1.jpg" alt="Event 1">
+            <img src="assets/images/event1-rulebook.jpg" alt="Event 1 Rulebook">
           `
         },
         {
@@ -66,8 +66,8 @@ window.SITE_CONTENT = {
           label: "Event2",
           title: "Event 2",
           body: `
-            <div class="img-placeholder"><span class="ico">📖</span>와드 상세 이미지/문서 준비 중</div>
-            <p>Event 2 와드 내용과 진행 규정이 이곳에 안내될 예정입니다.</p>
+            <img src="assets/images/event2.jpg" alt="Event 2">
+            <img src="assets/images/event2-rulebook.jpg" alt="Event 2 Rulebook">
           `
         },
         {
@@ -75,8 +75,8 @@ window.SITE_CONTENT = {
           label: "Event3",
           title: "Event 3",
           body: `
-            <div class="img-placeholder"><span class="ico">📖</span>와드 상세 이미지/문서 준비 중</div>
-            <p>Event 3 와드 내용과 진행 규정이 이곳에 안내될 예정입니다.</p>
+            <img src="assets/images/event3.jpg" alt="Event 3">
+            <img src="assets/images/event3-rulebook.jpg" alt="Event 3 Rulebook">
           `
         }
       ]

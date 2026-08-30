@@ -18,7 +18,7 @@
     foot: document.getElementById('foot-note')
   };
 
-  var state = { wods: [], teams: [], view: 'overall', query: '', demo: false };
+  var state = { wods: [], teams: [], view: 'overall', query: '', demo: false, quietRetryUsed: false };
 
   /* ================= CSV ================= */
 
@@ -421,9 +421,16 @@
         var wods = buildWods(res[0]);
         var teams = buildTeams(res[1], wods);
         if (!wods.length) throw new Error('wods 시트에 종목이 없습니다');
+        // 구글 시트 "웹에 게시" CSV는 가끔 일시적으로 비거나 불완전한 응답을 준다.
+        // 이미 정상 데이터를 보여주고 있었는데 갑자기 팀 수가 크게 줄면
+        // 실제 변화가 아니라 일시적 오류로 보고 기존 화면을 유지한다.
+        if (state.teams.length && teams.length < state.teams.length * 0.5) {
+          throw new Error('시트 응답이 불완전합니다 (일시적 오류로 보임, 잠시 후 재시도)');
+        }
         state.wods = wods;
         state.teams = teams;
         state.demo = false;
+        state.quietRetryUsed = false;
         el.banner.hidden = true;
         compute();
         renderAll();
@@ -437,6 +444,12 @@
           showBanner('구글 시트를 불러오지 못했습니다. <code>config.js</code> 의 CSV 주소와, ' +
             '시트가 <b>파일 → 공유 → 웹에 게시</b> 되어 있는지 확인하세요.');
           el.board.innerHTML = '<div class="empty">데이터를 불러올 수 없습니다.</div>';
+        } else if (!manual && !state.quietRetryUsed) {
+          // 이미 보여줄 데이터가 있는 상태의 일시적 오류라면, 화면은 그대로 두고
+          // 잠시 후 조용히 딱 한 번만 더 시도한다 (구글 시트 CSV의 일시적 지연/오류 대응).
+          // 계속 실패해도 재시도를 계속 쌓지 않고, 다음 정기 새로고침 때 다시 판단한다.
+          state.quietRetryUsed = true;
+          setTimeout(function () { load(); }, 4000);
         }
       })
       .then(function () { el.refresh.classList.remove('spin'); });

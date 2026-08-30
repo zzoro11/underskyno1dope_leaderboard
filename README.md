@@ -11,12 +11,12 @@
 
 | 메인 메뉴 | 하위 메뉴 |
 |---|---|
-| **Competition Info** | Time table · Regulations · Used market · Best Dresser |
+| **Notice** | Time table · Regulations · Used market · Best Dresser |
 | **WOD & RULE** | Event1 · Event2 · Event3 |
 | **Leader board** | Overall · E1 · E2 · E3 · F |
 
 - 메인 메뉴 선택 색상은 **주황**, 하위 메뉴 선택 색상은 **노랑**입니다. ([assets/style.css](assets/style.css) 에서 `--accent`, `--gold` 변수로 조절)
-- Competition Info / WOD & RULE 의 문구·이미지는 [assets/content.js](assets/content.js) 에서 편집합니다.
+- Notice / WOD & RULE 의 문구·이미지는 [assets/content.js](assets/content.js) 에서 편집합니다.
 - Leader board 의 하위 메뉴(Overall/E1/E2/E3/F)는 구글 시트의 `wods` 탭에서 자동으로 만들어집니다 — content.js 를 건드릴 필요 없습니다.
 - `F`(Final)는 아직 진행 전이라 임시로 넣어둔 자리입니다. 결승을 안 한다면 `wods` 탭에서 그 줄을 지우면 탭에서도 사라집니다.
 
@@ -170,7 +170,7 @@ sheetCsv: {
 
 ```
 config.js          대회 이름, 구글 시트 주소, 채점 옵션  ← 리더보드 연결은 여기만 수정
-assets/content.js  Competition Info / WOD & RULE 문구·이미지  ← 안내 문구는 여기만 수정
+assets/content.js  Notice / WOD & RULE 문구·이미지  ← 안내 문구는 여기만 수정
 index.html         화면 골격
 assets/style.css   디자인 (색상 변수 포함)
 assets/app.js      CSV 파싱 · 순위 계산 · 리더보드 렌더링
