@@ -15,8 +15,8 @@ window.SITE_CONTENT = {
           label: "Time table",
           title: "Time table",
           body: `
-            <div class="img-placeholder"><span class="ico">🗓️</span>타임테이블 이미지 준비 중</div>
-            <p>대회 당일 진행 순서와 시간이 이곳에 안내될 예정입니다.</p>
+            <img src="assets/images/timetable.jpg" alt="Time table">
+            <img src="assets/images/heat-table.jpg" alt="Heat table">
           `
         },
         {
@@ -24,8 +24,9 @@ window.SITE_CONTENT = {
           label: "Regulations",
           title: "Regulations",
           body: `
-            <div class="img-placeholder"><span class="ico">📋</span>안내 이미지 준비 중</div>
-            <p>박스 내 주차, 짐 보관, 관중석 등 이용 수칙이 이곳에 안내될 예정입니다.</p>
+            <img src="assets/images/regulations-box.jpg" alt="박스 이용 관련">
+            <img src="assets/images/regulations-competition.jpg" alt="대회 관련">
+            <img src="assets/images/regulations-afterparty.jpg" alt="뒤풀이 관련">
           `
         },
         {
@@ -33,8 +34,7 @@ window.SITE_CONTENT = {
           label: "Used market",
           title: "Used market",
           body: `
-            <div class="img-placeholder"><span class="ico">🛍️</span>안내 이미지 준비 중</div>
-            <p>바자회(중고 마켓) 운영 시간과 위치가 이곳에 안내될 예정입니다.</p>
+            <img src="assets/images/notice-bazaar.jpg" alt="바자회 관련">
           `
         },
         {
