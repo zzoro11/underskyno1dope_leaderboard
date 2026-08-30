@@ -15,6 +15,34 @@
 
   var state = { section: null, subtab: null };
 
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var lightboxClose = document.getElementById('lightbox-close');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.hidden = false;
+    lightbox.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  }
+  el.contentBody.addEventListener('click', function (e) {
+    var img = e.target.closest ? e.target.closest('.content-page img') : null;
+    if (img) openLightbox(img.src, img.alt);
+  });
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  });
+
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];

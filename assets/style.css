@@ -99,7 +99,26 @@ body::before{
 .content-page h2{margin:0 0 14px;font-size:20px;font-weight:800;letter-spacing:-.01em}
 .content-page p{margin:0 0 14px;color:var(--txt-2);font-size:15px;line-height:1.7;white-space:pre-wrap;word-break:keep-all}
 .content-page p:last-child{margin-bottom:0}
-.content-page img{max-width:100%;border-radius:var(--radius);display:block;margin:0 0 14px}
+.content-page img{max-width:100%;border-radius:var(--radius);display:block;margin:0 0 14px;cursor:zoom-in}
+
+/* ---------- 이미지 확대 보기 ---------- */
+.lightbox{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(5,5,6,.95);
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.lightbox[hidden]{display:none}
+.lightbox img{
+  display:block;width:100%;height:auto;margin:0;
+}
+.lightbox-close{
+  position:fixed;top:14px;right:14px;z-index:1000;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+  color:#fff;font-size:18px;line-height:1;cursor:pointer;
+}
+.lightbox-close:active{transform:scale(.94)}
 
 .img-placeholder{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
